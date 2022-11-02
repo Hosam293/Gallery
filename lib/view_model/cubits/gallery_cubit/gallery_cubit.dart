@@ -56,7 +56,8 @@ class GalleryCubit extends Cubit<GalleryStates> {
 
   // UploadImageModel? uploadImageModel;
 
-  void uploadImage(File file) async {
+  Future<void> uploadImage(File file) async {
+    print('loading');
     String fileName = file.path.split('/').last;
     FormData data = FormData.fromMap({
       "img": await MultipartFile.fromFile(file.path,
@@ -67,8 +68,9 @@ class GalleryCubit extends Cubit<GalleryStates> {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${token ?? ''}',
     };
+    print('data');
 emit(UploadImageLoadingState());
-    dio
+   await dio
         .post(
       'https://technichal.prominaagency.com/api/upload',
       data: data,
@@ -79,11 +81,10 @@ emit(UploadImageLoadingState());
           }),
     )
         .then((value) {
-      print(value.data);
-      print(value.data);
+
+
       emit(UploadImageSuccessState());
     }).catchError((error) {
-      print(error);
       if (error is DioError) {
 
         emit(UploadImageErrorState(

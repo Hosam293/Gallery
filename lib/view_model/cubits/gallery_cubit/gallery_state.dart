@@ -20,7 +20,10 @@ class PhotoPickedErrorState extends GalleryStates {}
 
 class MriUploadStart extends GalleryStates {}
 class UploadImageLoadingState extends GalleryStates {}
-class UploadImageSuccessState extends GalleryStates {}
+class UploadImageSuccessState extends GalleryStates
+{
+
+}
 
 class UploadImageErrorState extends GalleryStates
 {

@@ -15,9 +15,7 @@ class LoginSuccessState extends AuthStates {
 }
 
 class LoginErrorState extends AuthStates {
-  String msg;
+  final String msg;
 
   LoginErrorState(this.msg);
 }
-
-

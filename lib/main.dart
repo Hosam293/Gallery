@@ -30,25 +30,34 @@ Future<void> main() async {
   HttpOverrides.global = MyHttpOverrides();
   await CacheHelper.init();
   DioHelper.init();
+  var token = CacheHelper.getData(key: 'accessToken');
+  Widget startWidget;
+  if (token != null) {
+    startWidget = GalleryScreen();
+  } else {
+    startWidget = LoginScreen();
+  }
   BlocOverrides.runZoned(
-        () {
+    () {
       // Use cubits...
-      runApp(MultiBlocProvider(providers: [
-        BlocProvider(create: (context) => AuthCubit()),
-        BlocProvider(create: (context) => GalleryCubit()),
-
-      ], child: MyApp()));
+      runApp(MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) => AuthCubit()),
+            BlocProvider(create: (context) => GalleryCubit()),
+          ],
+          child: MyApp(
+            startScreen: startWidget,
+          )));
     },
     blocObserver: MyBlocObserver(),
   );
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
+class MyApp extends StatelessWidget {
+  Widget? startScreen;
 
-class _MyAppState extends State<MyApp> {
+  MyApp({super.key, this.startScreen});
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -58,10 +67,9 @@ class _MyAppState extends State<MyApp> {
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
-
-          title: 'My',
+          title: 'My-Gallery',
           theme: lightTheme,
-          home: LoginScreen(),
+          home: startScreen,
         );
       },
     );

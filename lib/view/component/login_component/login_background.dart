@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class BackGroundImages extends StatelessWidget {
-  const BackGroundImages({
+class LoginBackGround extends StatelessWidget {
+  const LoginBackGround({
     Key? key,
   }) : super(key: key);
 
@@ -12,18 +12,18 @@ class BackGroundImages extends StatelessWidget {
       children: [
         Positioned(
             bottom: 0,
-            top: -100.sp,
+            top: 0,
             right: 0,
             child: Image.asset('assets/images/pink.png')),
         Positioned(
             bottom: 0,
-            left: -80.sp,
+            left: -80,
             child: Image.asset('assets/images/Ellipse 1627.png')),
-        Positioned(
-            bottom: -80.sp,
-            left: 0,
+        Positioned(left: 0,
             right: 0,
-            child: Image.asset('assets/images/orange.png')),
+            bottom: -80,
+
+            child: Image.asset('assets/images/Ellipse 1629.png',fit: BoxFit.cover,height: 300,width: 400.w)),
       ],
     );
   }
